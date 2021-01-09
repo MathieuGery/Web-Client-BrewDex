@@ -1,9 +1,27 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-
+import React, {useState} from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import Header from '../partials/Header';
+import signInApi from "../api/SignUp";
+import {toast, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-function SignUp() {
+function SignUp(props) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [repPassword, setRepPassword] = useState("");
+  const history = useHistory();
+
+  const loginApiCall = (name, email, password, repPassword) => {
+    signInApi(name, email, password, repPassword).then((response) => {
+      console.log(response)
+      if (response === true) {
+        history.push("/");
+        toast.success("Account Created")
+      }
+    });
+  };
+
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
 
@@ -28,24 +46,30 @@ function SignUp() {
                   <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full px-3">
                       <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="name">Name <span className="text-red-600">*</span></label>
-                      <input id="name" type="text" className="form-input w-full text-gray-800" placeholder="Enter your name" required />
+                      <input value={name} id="name" type="text" className="form-input w-full text-gray-800" placeholder="Enter your name" onChange={event => setName(event.target.value)} required />
                     </div>
                   </div>
                   <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full px-3">
                       <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="email">Email <span className="text-red-600">*</span></label>
-                      <input id="email" type="email" className="form-input w-full text-gray-800" placeholder="Enter your email address" required />
+                      <input value={email} id="email" type="email" className="form-input w-full text-gray-800" placeholder="Enter your email address" onChange={(event => setEmail(event.target.value))} required />
                     </div>
                   </div>
                   <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full px-3">
                       <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="password">Password <span className="text-red-600">*</span></label>
-                      <input id="password" type="password" className="form-input w-full text-gray-800" placeholder="Enter your password" required />
+                      <input value={password} id="password" type="password" className="form-input w-full text-gray-800" placeholder="Enter your password" onChange={event => setPassword(event.target.value)} required />
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap -mx-3 mb-4">
+                    <div className="w-full px-3">
+                      <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="password">Password <span className="text-red-600">*</span></label>
+                      <input value={repPassword} id="password" type="password" className="form-input w-full text-gray-800" placeholder="Enter your password again" onChange={event => setRepPassword(event.target.value)} required />
                     </div>
                   </div>
                   <div className="flex flex-wrap -mx-3 mt-6">
                     <div className="w-full px-3">
-                      <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full">Sign up</button>
+                      <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full" type="submit" onClick={(e) => {e.preventDefault();loginApiCall(name, email, password, repPassword)}}>Sign up</button>
                     </div>
                   </div>
                   <div className="text-sm text-gray-500 text-center mt-3">
@@ -77,6 +101,9 @@ function SignUp() {
                         <span className="flex-auto pl-16 pr-8 -ml-16">Continue with Google</span>
                       </button>
                     </div>
+                  </div>
+                  <div>
+                    <ToastContainer />
                   </div>
                 </form>
                 <div className="text-gray-600 text-center mt-6">

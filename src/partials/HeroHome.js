@@ -45,7 +45,13 @@ function HeroHome() {
               </div>
             </div>
           </div>
-
+          <div className="flex justify-end pt-2">
+            <button
+                className="px-4 bg-transparent p-3 rounded-lg text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2">Action
+            </button>
+            <button className="modal-close px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Close
+            </button>
+          </div>
           {/* Hero image */}
           <div>
             <div className="relative flex justify-center mb-8" data-aos="zoom-y-out" data-aos-delay="450">

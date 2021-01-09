@@ -7,10 +7,13 @@ import FeaturesBlocks from '../partials/FeaturesBlocks';
 import Testimonials from '../partials/Testimonials';
 import Newsletter from '../partials/Newsletter';
 import Footer from '../partials/Footer';
+import {ToastContainer} from "react-toastify";
 
 function Home() {
   return (
+
     <div className="flex flex-col min-h-screen overflow-hidden">
+        <ToastContainer />
 
       {/*  Site header */}
       <Header />
