@@ -1,8 +1,8 @@
 import axios from "axios";
 import {toast} from "react-toastify";
 import {SIGN_IN_URL} from '../constants/apiEndpoints';
-import Cookies from 'js-cookie';
 import setAxiosConfig from "../helpers/setAxiosConfig";
+import {storeUser} from "../tools/Auth";
 
 
 async function signInApi(email, password) {
@@ -21,7 +21,7 @@ async function signInApi(email, password) {
     return await axios(config).then((response) => {
 
         if (response.status === 200) {
-            Cookies.set('jwt', response.data.token);
+            storeUser(response.data.token);
             return true;
         } else {
             console.log(response)
