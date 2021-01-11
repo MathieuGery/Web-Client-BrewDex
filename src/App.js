@@ -14,6 +14,7 @@ import Home from './pages/Home';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import ResetPassword from './pages/ResetPassword';
+import {ToastContainer} from "react-toastify";
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
 
   return (
     <>
+      <ToastContainer />
       <Switch>
         <Route exact path="/">
           <Home />

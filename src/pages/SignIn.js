@@ -1,9 +1,25 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, {useState} from 'react';
+import {Link, useHistory} from 'react-router-dom';
 
 import Header from '../partials/Header';
+import signInApi from "../api/SignIn";
+import {toast} from "react-toastify";
 
 function SignIn() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const history = useHistory();
+
+  const loginApiCall = (email, password) => {
+    signInApi(email, password).then(response => {
+      console.log(response)
+      if (response === true) {
+        history.push("/");
+        toast.success("You are connected 🎉")
+      }
+    })
+  };
+
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
 
@@ -28,7 +44,7 @@ function SignIn() {
                   <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full px-3">
                       <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="email">Email</label>
-                      <input id="email" type="email" className="form-input w-full text-gray-800" placeholder="Enter your email address" required />
+                      <input value={email} id="email" type="email" className="form-input w-full text-gray-800" placeholder="Enter your email address" onChange={event => setEmail(event.target.value)} required />
                     </div>
                   </div>
                   <div className="flex flex-wrap -mx-3 mb-4">
@@ -37,7 +53,7 @@ function SignIn() {
                         <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="password">Password</label>
                         <Link to="reset-password" className="text-sm font-medium text-blue-600 hover:underline">Having trouble signing in?</Link>
                       </div>
-                      <input id="password" type="password" className="form-input w-full text-gray-800" placeholder="Enter your password" required />
+                      <input value={password} id="password" type="password" className="form-input w-full text-gray-800" placeholder="Enter your password" onChange={event => setPassword(event.target.value)} required />
                     </div>
                   </div>
                   <div className="flex flex-wrap -mx-3 mb-4">
@@ -52,7 +68,7 @@ function SignIn() {
                   </div>
                   <div className="flex flex-wrap -mx-3 mt-6">
                     <div className="w-full px-3">
-                      <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full">Sign in</button>
+                      <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full" onClick={(e) => {e.preventDefault(); loginApiCall(email, password)}}>Sign in</button>
                     </div>
                   </div>
                 </form>

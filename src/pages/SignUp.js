@@ -1,19 +1,19 @@
 import React, {useState} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Header from '../partials/Header';
-import signInApi from "../api/SignUp";
-import {toast, ToastContainer} from 'react-toastify';
+import signUpApi from "../api/SignUp";
+import {toast} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-function SignUp(props) {
+function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repPassword, setRepPassword] = useState("");
   const history = useHistory();
 
-  const loginApiCall = (name, email, password, repPassword) => {
-    signInApi(name, email, password, repPassword).then((response) => {
+  const signupApiCall = (name, email, password, repPassword) => {
+    signUpApi(name, email, password, repPassword).then((response) => {
       console.log(response)
       if (response === true) {
         history.push("/");
@@ -69,11 +69,11 @@ function SignUp(props) {
                   </div>
                   <div className="flex flex-wrap -mx-3 mt-6">
                     <div className="w-full px-3">
-                      <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full" type="submit" onClick={(e) => {e.preventDefault();loginApiCall(name, email, password, repPassword)}}>Sign up</button>
+                      <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full" type="submit" onClick={(e) => {e.preventDefault(); signupApiCall(name, email, password, repPassword)}}>Sign up</button>
                     </div>
                   </div>
                   <div className="text-sm text-gray-500 text-center mt-3">
-                    By creating an account, you agree to the <a className="underline" href="#0">terms & conditions</a>, and our <a className="underline" href="#0">privacy policy</a>.
+                    By creating an account, you agree to the <a className="underline" href="/">terms & conditions</a>, and our <a className="underline" href="#0">privacy policy</a>.
                                 </div>
                 </form>
                 <div className="flex items-center my-6">
@@ -101,9 +101,6 @@ function SignUp(props) {
                         <span className="flex-auto pl-16 pr-8 -ml-16">Continue with Google</span>
                       </button>
                     </div>
-                  </div>
-                  <div>
-                    <ToastContainer />
                   </div>
                 </form>
                 <div className="text-gray-600 text-center mt-6">
