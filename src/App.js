@@ -15,6 +15,7 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import ResetPassword from './pages/ResetPassword';
 import {ToastContainer} from "react-toastify";
+import NotFound from "./pages/NotFound";
 
 function App() {
 
@@ -51,6 +52,9 @@ function App() {
         </Route>
         <Route path="/reset-password">
           <ResetPassword />
+        </Route>
+        <Route path="*">
+          <NotFound/>
         </Route>
       </Switch>
     </>
