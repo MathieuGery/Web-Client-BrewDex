@@ -13,7 +13,7 @@ function Header() {
   function logout() {
     setConnected(false);
     removeUser();
-    history.go('/');
+    history.go("/");
   }
   // detect whether user has scrolled the page down by 10px
   useEffect(() => {

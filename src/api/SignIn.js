@@ -29,7 +29,7 @@ async function signInApi(email, password) {
         }
     }).catch((error) => {
         if (error.response) {
-            toast.error(error.response.data.errors.errors[0].messages[0]);
+            toast.error(error.response.data.message);
             return false;
         }
         return true;

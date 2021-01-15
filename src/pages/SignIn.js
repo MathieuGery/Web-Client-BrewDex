@@ -14,8 +14,9 @@ function SignIn() {
     signInApi(email, password).then(response => {
       console.log(response)
       if (response === true) {
-        history.go('/');
         toast.success("You are connected 🎉");
+        history.replace("/");
+        history.go();
       }
     })
   };
