@@ -7,7 +7,7 @@ import {removeUser} from "../tools/Auth";
 function Header() {
 
   const [top, setTop] = useState(true);
-  const [connected, setConnected] = useRecoilState(connectedState)
+  const [connected, setConnected] = useRecoilState(connectedState);
   const history = useHistory();
 
   function logout() {
