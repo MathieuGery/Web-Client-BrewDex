@@ -1,23 +1,24 @@
 import React, {useState} from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Header from '../partials/Header';
 import signUpApi from "../api/SignUp";
 import {toast} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import BrewDexModal from "../partials/Modal";
 
 function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repPassword, setRepPassword] = useState("");
-  const history = useHistory();
+  const [showModal, setShowModal] = useState(false);
 
   const signupApiCall = (name, email, password, repPassword) => {
     signUpApi(name, email, password, repPassword).then((response) => {
       console.log(response)
       if (response === true) {
-        history.push("/");
-        toast.success("Account Created")
+        toast.success("Account Created");
+        setShowModal(true);
       }
     });
   };
@@ -26,6 +27,7 @@ function SignUp() {
     <div className="flex flex-col min-h-screen overflow-hidden">
 
       {/*  Site header */}
+      {showModal ? (<BrewDexModal title={"Compte créé avec succés"} subtitle={"Un email de confirmation vous a été envoyé"} buttonTitle={"Ok"} emoji={ <span role="img" aria-label="mail">📬</span>}/>):(null)}
       <Header />
 
       {/*  Page content */}

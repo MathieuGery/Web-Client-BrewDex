@@ -9,7 +9,7 @@ function NotFound() {
                     <Link to="/" className="text-base font-semibold text-indigo-600 tracking-wide uppercase">Go to home</Link>
                     <p className="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">404 Not Found</p>
                     <p className="max-w-xl mt-5 mx-auto text-xl text-gray-500">Sorry you seem lost</p>
-                   <span role="img" aria-label="sheep">🧐</span>
+                   <span role="img" aria-label="loose">🧐</span>
                 </div>
             </div>
         </div>
