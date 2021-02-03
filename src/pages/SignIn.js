@@ -15,7 +15,7 @@ function SignIn() {
       console.log(response)
       if (response === true) {
         toast.success("You are connected 🎉");
-        history.replace("/");
+        history.replace("/home");
         history.go();
       }
     })
